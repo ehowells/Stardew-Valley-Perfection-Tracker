@@ -1,1 +1,13 @@
-In this project, I will use the .xnb files from Stardew Valley's metadata and .xml files representing a user's saved game to create a tool that tracks the player's progress in the end-game goal of reaching "perfection" (catching all fish, cooking and crafting all recipes, completing the community center or JojaMart projects, etc.) This tool works offline and only requires data exported from local Stardew Valley installations. 
+This project combines Stardew Valley’s internal game metadata (.xnb files, unpacked to JSON) with player save data (.xml) to track progress toward the end-game “perfection” goal.
+It automates milestones including (but not limited to):
+
+- Catching all fish species (including festival / 1.6 additions)
+
+- Cooking every recipe at least once
+
+- Crafting all items
+
+- Completing the Community Center or Joja route
+
+The tracker works offline and does not modify your save.
+All data is sourced from your local Stardew Valley installation and can be explored using Python, pandas, and SQL.
