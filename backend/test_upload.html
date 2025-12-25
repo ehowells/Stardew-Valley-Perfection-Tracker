@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test File Upload</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        #result { margin-top: 20px; white-space: pre-wrap; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Test Stardew Valley Save Upload</h1>
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">Upload and Analyze</button>
+    <div id="result"></div>
+
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const resultDiv = document.getElementById('result');
+
+            if (!fileInput.files[0]) {
+                resultDiv.innerHTML = '<p class="error">Please select a file first</p>';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            resultDiv.innerHTML = '<p>Uploading...</p>';
+
+            try {
+                const response = await fetch('http://localhost:5001/api/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to analyze file');
+                }
+
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        <h2>Success!</h2>
+                        <h3>Fish Progress:</h3>
+                        <p>Caught: ${data.fish.caught} / ${data.fish.total}</p>
+                        <p>Missing: ${data.fish.uncaught}</p>
+
+                        <h3>Recipe Progress:</h3>
+                        <p>Learned: ${data.recipes.learned} / ${data.recipes.total}</p>
+                        <p>Cooked: ${data.recipes.cooked} / ${data.recipes.total}</p>
+                        <p>Need to cook: ${data.recipes.missingToCook}</p>
+                    </div>
+                `;
+            } catch (err) {
+                resultDiv.innerHTML = `<p class="error">Error: ${err.message}</p>`;
+                console.error('Full error:', err);
+            }
+        }
+    </script>
+</body>
+</html>
