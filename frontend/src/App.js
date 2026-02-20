@@ -17,7 +17,7 @@ function App() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('https://your-render-url.onrender.com/api/analyze', {
+      const response = await fetch('https://stardew-valley-perfection-tracker.onrender.com/api/analyze', {
         method: 'POST',
         body: formData,
       });
