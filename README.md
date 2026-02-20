@@ -1,3 +1,5 @@
+Live demo: https://ehowells.github.io/Stardew-Valley-Perfection-Tracker/
+
 This project combines Stardew Valley’s internal game metadata (.xnb files, unpacked to JSON) with player save data (.xml) to track progress toward the end-game “perfection” goal.
 It automates milestones including (but not limited to):
 
