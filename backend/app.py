@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
-from parser import analyze_save_file
+from save_parser import analyze_save_file
 
 app = Flask(__name__)
 CORS(app)
@@ -42,6 +42,7 @@ def analyze():
     if not allowed_file(file.filename):
         return jsonify({"error": "Invalid file type. Please upload a Stardew Valley save file."}), 400
 
+    filepath = None  # FIX: initialise before try so except block can always reference it safely
     try:
         filename = secure_filename(file.filename) or 'save_file'
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -54,7 +55,7 @@ def analyze():
         return jsonify(result)
 
     except Exception as e:
-        if os.path.exists(filepath):
+        if filepath and os.path.exists(filepath):  # FIX: guard against filepath being None
             os.remove(filepath)
         return jsonify({"error": f"Failed to analyze save file: {str(e)}"}), 500
 
