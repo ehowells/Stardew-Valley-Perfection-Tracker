@@ -4,11 +4,46 @@ import './Results.css';
 function Results({ results }) {
   const [activeTab, setActiveTab] = useState('fish');
 
-  const { fish, recipes } = results;
+  const { fish, recipes, progressSince } = results;
 
   return (
     <div className="results">
       <h2>Your Progress</h2>
+
+      {progressSince && (
+        <div className="progress-diff">
+          <h3>Progress Since Last Upload</h3>
+          <p className="diff-date">
+            Compared to upload on {new Date(progressSince.previousUploadAt).toLocaleString()}
+          </p>
+          <div className="diff-columns">
+            <div className="diff-section">
+              <span className="diff-label">🐟 New Fish Caught</span>
+              {progressSince.newlyCaughtFish.length > 0 ? (
+                <ul className="diff-list">
+                  {progressSince.newlyCaughtFish.map(f => (
+                    <li key={f.id}>{f.name}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="diff-none">None since last upload</p>
+              )}
+            </div>
+            <div className="diff-section">
+              <span className="diff-label">🍳 New Recipes Cooked</span>
+              {progressSince.newlyCookedRecipes.length > 0 ? (
+                <ul className="diff-list">
+                  {progressSince.newlyCookedRecipes.map(r => (
+                    <li key={r.name}>{r.name}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="diff-none">None since last upload</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="tabs">
         <button

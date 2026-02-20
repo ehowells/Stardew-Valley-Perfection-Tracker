@@ -253,6 +253,17 @@ def analyze_save_file(save_file_path):
                 "name": fish_info["name"]
             })
 
+    caught_fish_detailed = []
+    for fish_id in sorted(caught_fish_set):
+        fish_info = fish_data.get(fish_id)
+        if fish_info:
+            caught_fish_detailed.append({
+                "id": fish_id,
+                "name": fish_info["name"]
+            })
+
+    cooked_list = [{"name": name} for name in sorted(cooked_set)]
+
     return {
         "recipes": {
             "total": len(all_recipes),
@@ -260,12 +271,14 @@ def analyze_save_file(save_file_path):
             "cooked": len(cooked_set),
             "missingToLearn": len(missing_to_learn),
             "missingToCook": len(missing_to_cook),
-            "missingList": missing_recipes_detailed
+            "missingList": missing_recipes_detailed,
+            "cookedList": cooked_list,
         },
         "fish": {
             "total": len(all_fish),
             "caught": len(caught_fish_set),
             "uncaught": len(uncaught_fish),
-            "missingList": missing_fish_detailed
+            "missingList": missing_fish_detailed,
+            "caughtList": caught_fish_detailed,
         }
     }

@@ -151,3 +151,76 @@
   color: #666;
   font-size: 16px;
 }
+
+/* Progress diff banner */
+
+.progress-diff {
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.progress-diff h3 {
+  margin: 0 0 0.25rem 0;
+  color: #2e7d32;
+  font-size: 18px;
+}
+
+.diff-date {
+  font-size: 13px;
+  color: #555;
+  margin: 0 0 1rem 0;
+}
+
+.diff-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .diff-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.diff-section {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.diff-label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.diff-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.diff-list li {
+  padding: 0.3rem 0;
+  font-size: 14px;
+  color: #444;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.diff-list li:last-child {
+  border-bottom: none;
+}
+
+.diff-none {
+  font-size: 13px;
+  color: #999;
+  margin: 0;
+  font-style: italic;
+}
